@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-    const std::string plug_name = "./libAiPluginTest.so";
+    const std::string plug_name = "libAiPluginTest.so";
 
     AiProcessor *processor = new AiProcessorImpl;
     PluginManager plugin_manager(processor);
@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
 
         case 'n':
             test_inter_face = nullptr;
+            plugin_manager.UnLoadPlugin(plug_name);
             break;
 
         case 'q':
