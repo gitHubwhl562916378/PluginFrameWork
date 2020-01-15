@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../../build)
-# set(CMAKE_SHARED_LINKER_FLAGS "-rdynamic") 
 set(OpenCV_DIR /usr/local/opencv-3.4.5/share/OpenCV)
 project(AiPluginTest)
 find_package(OpenCV REQUIRED)

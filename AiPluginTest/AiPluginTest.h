@@ -2,7 +2,7 @@
 #include <thread>
 #include "../Interface.h"
 
-class AiPluginTest : public PluginInterface
+class PLUGIN_API_EXPORT AiPluginTest : public PluginInterface
 {
 public:
     AiPluginTest(AiProcessor *pro):PluginInterface(pro){}

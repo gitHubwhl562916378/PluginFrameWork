@@ -8,12 +8,12 @@ AiPluginTest::~AiPluginTest()
         work_thr_.join();
     }
     processor_->ClearFaceInfo();
-    ::printf("AiPluginTest::~AiPluginTest\n");
+    ::printf("AiPluginTest::~AiPluginTestqqqqqqqqqqqqqqqqqqqqqqqqqqq\n");
 }
 
 bool AiPluginTest::Init(const std::string &params)
 {
-    ::printf("----------AiPluginTest::Init with param: %s-----\n", params);
+    ::printf("----------AiPluginTest::Init with param: %s-----\n", params.data());
     return true;
 }
 
@@ -47,7 +47,7 @@ void AiPluginTest::Stop()
 
 extern "C"
 {
-    std::shared_ptr<PluginInterface> CreatePlugin(AiProcessor *pro)
+    PLUGIN_API_EXPORT std::shared_ptr<PluginInterface>  CreatePlugin(AiProcessor *pro)
     {
         return std::make_shared<AiPluginTest>(pro);
     }

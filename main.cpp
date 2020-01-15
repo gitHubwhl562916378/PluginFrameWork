@@ -45,11 +45,10 @@ int main(int argc, char *argv[])
             test_inter_face->Stop();
             break;
 
-        case 'r':{
+        case 'r':
             if (plugin_manager.LoadPlugin(plug_name)) {
                 test_inter_face = plugin_manager.MakePlugin(plug_name);
             }
-        }
             break;
 
         case 'n':

@@ -4,7 +4,7 @@
 #include <memory>
 #include <mutex>
 #include "opencv2/opencv.hpp"
-
+#define PLUGIN_API_EXPORT __attribute__((visibility("default")))
 struct FaceRecogInfo
 {
     int trace_id;
@@ -23,8 +23,9 @@ public:
     virtual void ClearFaceInfo() = 0;
 };
 
-struct PluginInterface
+class PLUGIN_API_EXPORT PluginInterface
 {
+public:
     PluginInterface(AiProcessor *pro) : processor_(pro) {}
     virtual ~PluginInterface(){::printf("~PluginInterface\n");};
     virtual bool Init(const std::string &params) = 0;
@@ -78,10 +79,10 @@ public:
             }
         }
 
-        void *handle = dlopen(name.c_str(), RTLD_NOW | RTLD_DEEPBIND); //RTLD_NOW | RTLD_DEEPBIND RTLD_LAZY
+        void *handle = dlopen(name.c_str(), RTLD_NOW); //RTLD_NOW | RTLD_DEEPBIND RTLD_LAZY
         if (!handle)
         {
-            ::printf("!!!!!!!!!!dlopen %s fail!!!!!!!!!!!!!!!!!!\n", name.data());
+            ::printf("!!!!!!!!!!dlopen %s fail!!!!!!!!!!!!!!!!!!, %s\n", name.data(), dlerror());
             return false;
         }
 
