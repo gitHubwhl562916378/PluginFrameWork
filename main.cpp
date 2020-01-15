@@ -5,7 +5,6 @@
 #include <numeric>
 #include <mutex>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "threadpool.hpp"
 #include "AiProcessorImpl.h"
 
 int main(int argc, char *argv[])
@@ -45,6 +44,7 @@ int main(int argc, char *argv[])
 
         case 'n':
             test_inter_face = nullptr;
+            plugin_manager.UnLoadPlugin(plug_name);
             break;
 
         case 'q':

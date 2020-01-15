@@ -75,7 +75,7 @@ public:
             }
         }
 
-        void *handle = dlopen(name.c_str(), RTLD_NOW | RTLD_DEEPBIND); //RTLD_NOW | RTLD_DEEPBIND
+        void *handle = dlopen(name.c_str(), RTLD_NOW | RTLD_DEEPBIND); //RTLD_NOW | RTLD_DEEPBIND RTLD_LAZY
         if (!handle)
         {
             ::printf("!!!!!!!!!!dlopen %s fail!!!!!!!!!!!!!!!!!!\n", name.data());

@@ -7,6 +7,7 @@ AiPluginTest::~AiPluginTest()
     {
         work_thr_.join();
     }
+    processor_->ClearFaceInfo();
     ::printf("AiPluginTest::~AiPluginTest\n");
 }
 
