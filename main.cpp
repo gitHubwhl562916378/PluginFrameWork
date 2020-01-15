@@ -5,12 +5,11 @@
 #include <numeric>
 #include <mutex>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "threadpool.hpp"
 #include "AiProcessorImpl.h"
 
 int main(int argc, char *argv[])
 {
-    const std::string plug_name = "/home/whl/Documents/git/AiFrameWork/cpptest/build/libAiPluginTest.so";
+    const std::string plug_name = "./libAiPluginTest.so";
 
     AiProcessor *processor = new AiProcessorImpl;
     PluginManager plugin_manager(processor);
@@ -22,9 +21,6 @@ int main(int argc, char *argv[])
         return;
     }
 
-    test_inter_face->Init("test args");
-    test_inter_face->Start();
-
     volatile bool quit = false;
     while (!quit)
     {
@@ -32,7 +28,13 @@ int main(int argc, char *argv[])
         switch (c)
         {
         case 'u':
+            test_inter_face = nullptr;
             plugin_manager.UnLoadPlugin(plug_name);
+            break;
+
+        case 'g':
+            test_inter_face->Init("test args");
+            test_inter_face->Start();
             break;
 
         case 'c':
@@ -41,6 +43,13 @@ int main(int argc, char *argv[])
 
         case 's':
             test_inter_face->Stop();
+            break;
+
+        case 'r':{
+            if (plugin_manager.LoadPlugin(plug_name)) {
+                test_inter_face = plugin_manager.MakePlugin(plug_name);
+            }
+        }
             break;
 
         case 'n':

@@ -11,6 +11,9 @@ struct FaceRecogInfo
     std::string face_id;
     cv::Rect face_rect;
     cv::Mat org;
+    ~FaceRecogInfo() {
+        printf("~FaceRecogInfo\n");
+    }
 };
 
 class AiProcessor
@@ -94,7 +97,7 @@ public:
             std::lock_guard<std::mutex> lock(handle_mtx_);
             handles_map_.insert(std::make_pair(name, std::make_pair(handle, reg)));
         }
-        ::printf("plugin %s loaded\n", name.data());
+        ::printf("plugin %s loaded [%Lu]\n", name.data(), (unsigned long long)handle);
         return true;
     }
 
@@ -109,7 +112,7 @@ public:
                 ::printf("plugin not find\n");
                 return true;
             }
-            ::printf("plugin prepare close ptr: %d\n", (unsigned long long)iter->second.first);
+            ::printf("plugin prepare close ptr: %Lu\n", (unsigned long long)iter->second.first);
             dlclose(iter->second.first);
             handles_map_.erase(iter);
             ::printf("plugin unload\n");
