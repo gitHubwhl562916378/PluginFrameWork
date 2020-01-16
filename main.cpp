@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-    const std::string plug_name = "libAiPluginTest.so";
+    const std::string plug_name = "/home/whl/Documents/git/AiFrameWork/cpptest/build/libAiPluginTest.so";
 
     AiProcessor *processor = new AiProcessorImpl;
     PluginManager plugin_manager(processor);

@@ -36,6 +36,11 @@ protected:
     AiProcessor *processor_ = nullptr;
 };
 
+extern "C"
+{
+    PLUGIN_API_EXPORT std::shared_ptr<PluginInterface>  CreatePlugin(AiProcessor *pro);
+}
+
 typedef std::shared_ptr<PluginInterface> (*CretePluginFunc)(AiProcessor *pro);
 class PluginManager
 {
@@ -79,7 +84,7 @@ public:
             }
         }
 
-        void *handle = dlopen(name.c_str(), RTLD_NOW); //RTLD_NOW | RTLD_DEEPBIND RTLD_LAZY
+        void *handle = dlopen(name.c_str(), RTLD_NOW | RTLD_DEEPBIND); //RTLD_NOW | RTLD_DEEPBIND RTLD_LAZY
         if (!handle)
         {
             ::printf("!!!!!!!!!!dlopen %s fail!!!!!!!!!!!!!!!!!!, %s\n", name.data(), dlerror());

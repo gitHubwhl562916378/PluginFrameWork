@@ -3,12 +3,12 @@
 AiPluginTest::~AiPluginTest()
 {
     Stop();
-    if(work_thr_.joinable())
+    if (work_thr_.joinable())
     {
         work_thr_.join();
     }
     processor_->ClearFaceInfo();
-    ::printf("AiPluginTest::~AiPluginTestqqqqqqqqqqqqqqqqqqqqqqqqqqq\n");
+    ::printf("AiPluginTest::~AiPluginTest---------------\n");
 }
 
 bool AiPluginTest::Init(const std::string &params)
@@ -24,12 +24,12 @@ void AiPluginTest::Start()
         ::printf("--------AiPluginTest::Start-------\n");
         while (running_)
         {
-            
+
             cv::Mat org = cv::Mat::ones(3, 3, CV_8UC3);
             std::shared_ptr<FaceRecogInfo> info = std::make_shared<FaceRecogInfo>();
             info->face_id = "test_id ";
             info->face_id += std::to_string(id_idex_);
-            info->face_rect = cv::Rect(200,100,50,50);
+            info->face_rect = cv::Rect(200, 100, 50, 50);
             info->org = org;
             info->trace_id = id_idex_;
             id_idex_++;
@@ -45,10 +45,7 @@ void AiPluginTest::Stop()
     running_ = false;
 }
 
-extern "C"
+PLUGIN_API_EXPORT std::shared_ptr<PluginInterface> CreatePlugin(AiProcessor *pro)
 {
-    PLUGIN_API_EXPORT std::shared_ptr<PluginInterface>  CreatePlugin(AiProcessor *pro)
-    {
-        return std::make_shared<AiPluginTest>(pro);
-    }
+    return std::make_shared<AiPluginTest>(pro);
 }
